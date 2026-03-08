@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { Zap } from "lucide-react";
 
 const links = [
   { label: "Kursy",     href: "/courses/ai-basics/what-is-ai" },
@@ -13,12 +12,8 @@ export function Footer() {
     <footer className="border-t border-[var(--border)] py-12 px-6">
       <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
 
-        <Link href="/" className="flex items-center gap-2.5 group">
-          <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-violet-600 to-blue-600 flex items-center justify-center
-            group-hover:shadow-[0_0_12px_rgba(139,92,246,0.4)] transition-shadow duration-300">
-            <Zap className="w-3.5 h-3.5 text-white" />
-          </div>
-          <span className="font-black text-sm text-[var(--fg)]">LearnAI</span>
+        <Link href="/" className="group">
+          <span className="font-display font-bold text-base text-[var(--fg)] group-hover:text-[var(--primary)] transition-colors">LearnAI</span>
         </Link>
 
         <div className="flex items-center gap-6">

@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Zap, Menu, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 
 const navLinks = [
   { label: "Kursy",      href: "/courses/ai-basics/what-is-ai" },
@@ -41,11 +41,7 @@ export function Navbar() {
 
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2.5 group">
-            <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-blue-600 to-sky-500 flex items-center justify-center shadow-md shadow-blue-100
-              group-hover:shadow-blue-200 group-hover:scale-105 transition-all duration-300">
-              <Zap className="w-4 h-4 text-white" />
-            </div>
-            <span className="font-black text-base text-[var(--fg)] tracking-tight">LearnAI</span>
+            <span className="font-display font-bold text-lg text-[var(--fg)] tracking-tight group-hover:text-[var(--primary)] transition-colors">LearnAI</span>
           </Link>
 
           {/* Desktop nav */}
@@ -74,8 +70,7 @@ export function Navbar() {
           <div className="flex items-center gap-3">
             <Link href="/onboarding"
               className="hidden md:flex btn-primary items-center gap-2 px-5 py-2 text-sm font-semibold rounded-xl">
-              <Zap className="w-3.5 h-3.5" />
-              Zacznij za darmo
+              Zacznij
             </Link>
             <button onClick={() => setMobile(!mobile)}
               className="md:hidden w-9 h-9 rounded-lg flex items-center justify-center text-[var(--fg-muted)] hover:text-[var(--fg)] hover:bg-black/[0.05] transition-all">
@@ -101,8 +96,7 @@ export function Navbar() {
               <div className="pt-3 border-t border-black/[0.06] mt-1">
                 <Link href="/onboarding"
                   className="btn-primary flex items-center justify-center gap-2 px-5 py-3 text-sm font-semibold rounded-xl w-full">
-                  <Zap className="w-3.5 h-3.5" />
-                  Zacznij za darmo
+                  Zacznij
                 </Link>
               </div>
             </div>

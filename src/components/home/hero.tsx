@@ -3,7 +3,7 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import Link from "next/link";
 import { useRef } from "react";
-import { ArrowRight, Zap } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { stagger, fadeUp, fadeIn, viewport } from "@/lib/animations";
 
 const MODELS = ["Claude", "GPT-4o", "Gemini", "Mistral", "LangChain", "RAG", "Agents"];
@@ -49,8 +49,6 @@ export function Hero() {
             <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500" />
           </span>
           AI & Prompt Engineering Academy
-          <span className="h-3.5 w-px bg-[var(--border)]" />
-          <span className="text-[var(--primary)] font-semibold">Zacznij za darmo</span>
         </motion.div>
 
         {/* Headline */}
@@ -79,11 +77,10 @@ export function Hero() {
               <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
             </Link>
             <Link href="/simulator"
-              className="group flex items-center gap-2.5 px-8 py-4 text-base font-semibold rounded-xl
+              className="group flex items-center gap-2 px-8 py-4 text-base font-semibold rounded-xl
                 bg-[var(--bg-card)] border border-[var(--border)] text-[var(--fg-muted)]
                 hover:text-[var(--fg)] hover:border-[var(--border-md)] hover:shadow-md
                 shadow-sm transition-all duration-300">
-              <Zap className="w-4 h-4" />
               Prompt Simulator
             </Link>
           </motion.div>

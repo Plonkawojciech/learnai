@@ -2,22 +2,13 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { ArrowRight, Zap } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 export function StepWelcome({ onNext }: { onNext: (name: string) => void }) {
   const [name, setName] = useState("");
 
   return (
     <div className="text-center">
-      <motion.div
-        initial={{ scale: 0, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        transition={{ type: "spring", delay: 0.1 }}
-        className="w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-600 to-sky-500 flex items-center justify-center mx-auto mb-8 shadow-lg shadow-blue-100"
-      >
-        <Zap className="w-8 h-8 text-white" />
-      </motion.div>
-
       <motion.h1
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
@@ -61,7 +52,7 @@ export function StepWelcome({ onNext }: { onNext: (name: string) => void }) {
           Zaczynamy
           <ArrowRight className="w-4 h-4" />
         </button>
-        <p className="text-xs text-[var(--fg-subtle)] mt-3">Zajmie to ok. 3 minuty. Bez rejestracji.</p>
+        <p className="text-xs text-[var(--fg-subtle)] mt-3">Zajmie to ok. 3 minuty.</p>
       </motion.div>
     </div>
   );

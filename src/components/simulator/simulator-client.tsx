@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Zap, ArrowRight, RotateCcw, Copy, Check, Sparkles, TrendingUp, AlertCircle } from "lucide-react";
+import { ArrowRight, RotateCcw, Copy, Check, Sparkles, TrendingUp, AlertCircle } from "lucide-react";
 import { stagger, fadeUp, fadeScale } from "@/lib/animations";
 
 interface SimulatorResult {
@@ -87,7 +87,6 @@ export function SimulatorClient() {
         className="text-center mb-12">
         <motion.div variants={fadeUp}
           className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[var(--border)] bg-[var(--bg-subtle)] text-sm text-[var(--fg-muted)] mb-6">
-          <Zap className="w-3.5 h-3.5 text-[var(--primary)]" />
           Prompt Engineering Simulator
         </motion.div>
         <motion.h1 variants={fadeUp}
@@ -135,7 +134,7 @@ export function SimulatorClient() {
               {loading ? (
                 <><span className="w-3.5 h-3.5 border-2 border-white/30 border-t-white rounded-full animate-spin" />Analizuję...</>
               ) : (
-                <><Zap className="w-3.5 h-3.5" />Analizuj<ArrowRight className="w-3.5 h-3.5" /></>
+                <>Analizuj<ArrowRight className="w-3.5 h-3.5" /></>
               )}
             </button>
           </div>

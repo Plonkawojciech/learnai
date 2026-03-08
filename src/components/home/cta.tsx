@@ -56,7 +56,7 @@ export function CTA() {
               <motion.div variants={fadeUp} className="flex flex-col sm:flex-row items-center justify-center gap-4">
                 <Link href="/onboarding"
                   className="btn-primary group inline-flex items-center gap-2.5 px-8 py-4 text-base font-semibold rounded-xl">
-                  Zacznij teraz za darmo
+                  Zacznij
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
                 </Link>
                 <Link href="/simulator"
