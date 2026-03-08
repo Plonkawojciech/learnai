@@ -61,18 +61,18 @@ export function Hero() {
           className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-16"
         >
           <Link
-            href="/simulator"
+            href="/onboarding"
             className="group flex items-center gap-2 px-6 py-3.5 rounded-xl bg-gradient-to-r from-blue-500 to-violet-600 text-white font-semibold text-base shadow-lg hover:shadow-blue-500/25 hover:scale-105 transition-all duration-200"
           >
             <Zap className="w-4 h-4" />
-            Wypróbuj Prompt Simulator
+            Sprawdź swój poziom AI
             <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
           </Link>
           <Link
-            href="/courses"
+            href="/simulator"
             className="flex items-center gap-2 px-6 py-3.5 rounded-xl border border-[var(--border)] text-[var(--foreground)] font-semibold text-base hover:bg-[var(--muted)] transition-all duration-200"
           >
-            Zobacz kursy
+            Prompt Simulator
           </Link>
         </motion.div>
 
