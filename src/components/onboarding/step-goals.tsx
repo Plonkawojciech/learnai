@@ -29,8 +29,8 @@ export function StepGoals({
     <div>
       <div className="mb-8">
         <p className="text-sm font-semibold text-[var(--primary)] mb-1">Krok 2 z 3</p>
-        <h2 className="text-3xl font-black tracking-tight mb-2">Co chcesz osiągnąć?</h2>
-        <p className="text-[var(--muted-foreground)]">Zaznacz wszystkie które Cię dotyczą — od tego zależy Twój plan nauki.</p>
+        <h2 className="text-3xl font-black tracking-tight mb-2 text-[var(--fg)]">Co chcesz osiągnąć?</h2>
+        <p className="text-[var(--fg-muted)]">Zaznacz wszystkie które Cię dotyczą — od tego zależy Twój plan nauki.</p>
       </div>
 
       <div className="grid gap-3 mb-8">
@@ -40,14 +40,14 @@ export function StepGoals({
             onClick={() => toggle(goal.value)}
             className={`flex items-start gap-4 p-4 rounded-xl border text-left transition-all ${
               goals.includes(goal.value)
-                ? "border-[var(--primary)] bg-[var(--primary)]/10"
-                : "border-[var(--border)] bg-[var(--card)] hover:border-[var(--primary)]/40"
+                ? "border-[var(--primary)] bg-[var(--primary)]/8"
+                : "border-[var(--border)] bg-[var(--bg-card)] hover:border-[var(--primary)]/40"
             }`}
           >
             <span className="text-2xl shrink-0 mt-0.5">{goal.emoji}</span>
             <div>
-              <p className="font-semibold text-[var(--foreground)] text-sm">{goal.label}</p>
-              <p className="text-xs text-[var(--muted-foreground)] mt-0.5">{goal.desc}</p>
+              <p className="font-semibold text-[var(--fg)] text-sm">{goal.label}</p>
+              <p className="text-xs text-[var(--fg-muted)] mt-0.5">{goal.desc}</p>
             </div>
             {goals.includes(goal.value) && (
               <div className="ml-auto shrink-0 w-5 h-5 rounded-full bg-[var(--primary)] flex items-center justify-center">
@@ -59,13 +59,13 @@ export function StepGoals({
       </div>
 
       <div className="flex gap-3">
-        <button onClick={onBack} className="flex items-center gap-2 px-4 py-3 rounded-xl border border-[var(--border)] text-[var(--muted-foreground)] hover:text-[var(--foreground)] transition-all">
+        <button onClick={onBack} className="flex items-center gap-2 px-4 py-3 rounded-xl border border-[var(--border)] text-[var(--fg-muted)] hover:text-[var(--fg)] transition-all">
           <ArrowLeft className="w-4 h-4" />
         </button>
         <button
           onClick={() => onNext({ goals })}
           disabled={goals.length === 0}
-          className="flex-1 flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-blue-500 to-violet-600 text-white font-semibold disabled:opacity-50 disabled:cursor-not-allowed hover:opacity-90 transition-all"
+          className="flex-1 btn-primary flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-semibold disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none disabled:shadow-none"
         >
           Dalej
           <ArrowRight className="w-4 h-4" />

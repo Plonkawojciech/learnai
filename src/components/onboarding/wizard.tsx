@@ -12,7 +12,7 @@ import { StepResults } from "./step-results";
 
 export type OnboardingData = {
   name: string;
-  selfScore: number; // 0-10 slider
+  selfScore: number;
   aiUsage: string;
   usedTools: string[];
   goals: string[];
@@ -37,7 +37,7 @@ const TOTAL_STEPS = 4;
 
 export function OnboardingWizard() {
   const router = useRouter();
-  const [step, setStep] = useState(0); // 0=welcome, 1=self-assess, 2=goals, 3=background, 4=analyzing, 5=results
+  const [step, setStep] = useState(0);
   const [data, setData] = useState<Partial<OnboardingData>>({});
   const [result, setResult] = useState<AssessResult | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -50,7 +50,7 @@ export function OnboardingWizard() {
   const back = () => setStep((s) => s - 1);
 
   const analyze = async () => {
-    setStep(4); // analyzing
+    setStep(4);
     setError(null);
     try {
       const res = await fetch("/api/assess", {
@@ -61,7 +61,7 @@ export function OnboardingWizard() {
       const json = await res.json();
       if (!res.ok) throw new Error(json.error);
       setResult(json);
-      setStep(5); // results
+      setStep(5);
     } catch (e: unknown) {
       setError(e instanceof Error ? e.message : "Błąd analizy");
       setStep(3);
@@ -76,12 +76,12 @@ export function OnboardingWizard() {
   };
 
   return (
-    <div className="min-h-screen bg-[var(--background)] flex items-center justify-center px-4 py-12">
+    <div className="min-h-screen bg-[var(--bg)] flex items-center justify-center px-4 py-12">
       {/* Progress bar (steps 1-3) */}
       {step >= 1 && step <= 3 && (
-        <div className="fixed top-0 left-0 right-0 h-1 bg-[var(--border)]">
+        <div className="fixed top-0 left-0 right-0 h-0.5 bg-[var(--border)]">
           <motion.div
-            className="h-full bg-gradient-to-r from-blue-500 to-violet-600"
+            className="h-full bg-gradient-to-r from-violet-600 to-blue-600"
             initial={{ width: 0 }}
             animate={{ width: `${(step / TOTAL_STEPS) * 100}%` }}
             transition={{ duration: 0.4 }}

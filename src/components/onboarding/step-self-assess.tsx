@@ -47,17 +47,17 @@ export function StepSelfAssess({
     <div>
       <div className="mb-8">
         <p className="text-sm font-semibold text-[var(--primary)] mb-1">Krok 1 z 3</p>
-        <h2 className="text-3xl font-black tracking-tight mb-2">
+        <h2 className="text-3xl font-black tracking-tight mb-2 text-[var(--fg)]">
           Hej {name}! Jak dobrze znasz AI?
         </h2>
-        <p className="text-[var(--muted-foreground)]">
+        <p className="text-[var(--fg-muted)]">
           Bądź szczery — nie ma złych odpowiedzi. To tylko po to żebyś nie tracił czasu.
         </p>
       </div>
 
       {/* Self score slider */}
-      <div className="mb-8 p-5 rounded-2xl border border-[var(--border)] bg-[var(--card)]">
-        <label className="block text-sm font-semibold mb-4">
+      <div className="mb-8 p-5 rounded-2xl border border-[var(--border)] bg-[var(--bg-card)]">
+        <label className="block text-sm font-semibold mb-4 text-[var(--fg)]">
           Oceń swoją wiedzę o AI (0 = zero, 10 = ekspert):
           <span className="ml-2 text-[var(--primary)] font-bold">{selfScore}/10 — {SCORE_LABELS[selfScore]}</span>
         </label>
@@ -67,9 +67,9 @@ export function StepSelfAssess({
           max={10}
           value={selfScore}
           onChange={(e) => setSelfScore(Number(e.target.value))}
-          className="w-full h-2 rounded-full appearance-none cursor-pointer accent-blue-500"
+          className="w-full h-2 rounded-full appearance-none cursor-pointer accent-violet-600"
         />
-        <div className="flex justify-between text-xs text-[var(--muted-foreground)] mt-1">
+        <div className="flex justify-between text-xs text-[var(--fg-subtle)] mt-1">
           <span>0 — Zero</span>
           <span>5 — Używam</span>
           <span>10 — Ekspert</span>
@@ -78,7 +78,7 @@ export function StepSelfAssess({
 
       {/* Usage frequency */}
       <div className="mb-8">
-        <label className="block text-sm font-semibold mb-3">Jak często używasz narzędzi AI?</label>
+        <label className="block text-sm font-semibold mb-3 text-[var(--fg)]">Jak często używasz narzędzi AI?</label>
         <div className="grid gap-2">
           {AI_USAGE_OPTIONS.map((opt) => (
             <button
@@ -86,8 +86,8 @@ export function StepSelfAssess({
               onClick={() => setAiUsage(opt.value)}
               className={`px-4 py-3 rounded-xl border text-sm font-medium text-left transition-all ${
                 aiUsage === opt.value
-                  ? "border-[var(--primary)] bg-[var(--primary)]/10 text-[var(--foreground)]"
-                  : "border-[var(--border)] bg-[var(--card)] text-[var(--muted-foreground)] hover:border-[var(--primary)]/50"
+                  ? "border-[var(--primary)] bg-[var(--primary)]/8 text-[var(--fg)]"
+                  : "border-[var(--border)] bg-[var(--bg-card)] text-[var(--fg-muted)] hover:border-[var(--primary)]/40"
               }`}
             >
               {opt.label}
@@ -98,8 +98,8 @@ export function StepSelfAssess({
 
       {/* Tools used */}
       <div className="mb-8">
-        <label className="block text-sm font-semibold mb-3">
-          Które narzędzia/modele znasz lub używałeś? <span className="text-[var(--muted-foreground)] font-normal">(zaznacz wszystkie)</span>
+        <label className="block text-sm font-semibold mb-3 text-[var(--fg)]">
+          Które narzędzia/modele znasz lub używałeś? <span className="text-[var(--fg-muted)] font-normal">(zaznacz wszystkie)</span>
         </label>
         <div className="flex flex-wrap gap-2">
           {TOOLS_OPTIONS.map((tool) => (
@@ -108,8 +108,8 @@ export function StepSelfAssess({
               onClick={() => toggleTool(tool)}
               className={`px-3 py-1.5 rounded-full border text-sm font-medium transition-all ${
                 usedTools.includes(tool)
-                  ? "border-[var(--primary)] bg-[var(--primary)]/10 text-[var(--foreground)]"
-                  : "border-[var(--border)] text-[var(--muted-foreground)] hover:border-[var(--primary)]/50"
+                  ? "border-[var(--primary)] bg-[var(--primary)]/8 text-[var(--fg)]"
+                  : "border-[var(--border)] text-[var(--fg-muted)] hover:border-[var(--primary)]/40 bg-[var(--bg-card)]"
               }`}
             >
               {tool}
@@ -119,13 +119,13 @@ export function StepSelfAssess({
       </div>
 
       <div className="flex gap-3">
-        <button onClick={onBack} className="flex items-center gap-2 px-4 py-3 rounded-xl border border-[var(--border)] text-[var(--muted-foreground)] hover:text-[var(--foreground)] transition-all">
+        <button onClick={onBack} className="flex items-center gap-2 px-4 py-3 rounded-xl border border-[var(--border)] text-[var(--fg-muted)] hover:text-[var(--fg)] transition-all">
           <ArrowLeft className="w-4 h-4" />
         </button>
         <button
           onClick={() => onNext({ selfScore, aiUsage, usedTools })}
           disabled={!canNext}
-          className="flex-1 flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-blue-500 to-violet-600 text-white font-semibold disabled:opacity-50 disabled:cursor-not-allowed hover:opacity-90 transition-all"
+          className="flex-1 btn-primary flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-semibold disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none disabled:shadow-none"
         >
           Dalej
           <ArrowRight className="w-4 h-4" />

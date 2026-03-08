@@ -13,7 +13,7 @@ export function StepWelcome({ onNext }: { onNext: (name: string) => void }) {
         initial={{ scale: 0 }}
         animate={{ scale: 1 }}
         transition={{ type: "spring", delay: 0.1 }}
-        className="w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-500 to-violet-600 flex items-center justify-center mx-auto mb-8 shadow-xl"
+        className="w-16 h-16 rounded-2xl bg-gradient-to-br from-violet-600 to-blue-600 flex items-center justify-center mx-auto mb-8 shadow-xl shadow-violet-200"
       >
         <Zap className="w-8 h-8 text-white" />
       </motion.div>
@@ -22,7 +22,7 @@ export function StepWelcome({ onNext }: { onNext: (name: string) => void }) {
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.2 }}
-        className="text-4xl sm:text-5xl font-black tracking-tight mb-3"
+        className="text-4xl sm:text-5xl font-black tracking-tight mb-3 text-[var(--fg)]"
       >
         Witaj w LearnAI.
       </motion.h1>
@@ -30,7 +30,7 @@ export function StepWelcome({ onNext }: { onNext: (name: string) => void }) {
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.3 }}
-        className="text-[var(--muted-foreground)] text-lg mb-10 max-w-md mx-auto"
+        className="text-[var(--fg-muted)] text-lg mb-10 max-w-md mx-auto"
       >
         Zanim zaczniesz, chcemy poznać Ciebie i Twój poziom — żebyś nie tracił czasu na rzeczy które już umiesz.
       </motion.p>
@@ -41,7 +41,7 @@ export function StepWelcome({ onNext }: { onNext: (name: string) => void }) {
         transition={{ delay: 0.4 }}
         className="max-w-sm mx-auto"
       >
-        <label className="block text-sm font-medium text-[var(--foreground)] text-left mb-2">
+        <label className="block text-sm font-medium text-[var(--fg)] text-left mb-2">
           Jak mamy się do Ciebie zwracać?
         </label>
         <input
@@ -50,18 +50,18 @@ export function StepWelcome({ onNext }: { onNext: (name: string) => void }) {
           value={name}
           onChange={(e) => setName(e.target.value)}
           onKeyDown={(e) => e.key === "Enter" && name.trim() && onNext(name.trim())}
-          className="w-full px-4 py-3 rounded-xl border border-[var(--border)] bg-[var(--card)] text-[var(--foreground)] placeholder:text-[var(--muted-foreground)] outline-none focus:border-[var(--primary)] transition-colors text-base"
+          className="w-full px-4 py-3 rounded-xl border border-[var(--border)] bg-[var(--bg-card)] text-[var(--fg)] placeholder:text-[var(--fg-subtle)] outline-none focus:border-[var(--primary)] transition-colors text-base"
           autoFocus
         />
         <button
           onClick={() => name.trim() && onNext(name.trim())}
           disabled={!name.trim()}
-          className="mt-4 w-full flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-gradient-to-r from-blue-500 to-violet-600 text-white font-semibold text-base disabled:opacity-50 disabled:cursor-not-allowed hover:opacity-90 hover:scale-[1.02] transition-all shadow-lg"
+          className="mt-4 w-full btn-primary flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl text-base font-semibold disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none disabled:shadow-none"
         >
           Zaczynamy
           <ArrowRight className="w-4 h-4" />
         </button>
-        <p className="text-xs text-[var(--muted-foreground)] mt-3">
+        <p className="text-xs text-[var(--fg-subtle)] mt-3">
           Zajmie to ok. 3 minuty. Bez rejestracji.
         </p>
       </motion.div>

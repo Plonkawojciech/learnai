@@ -23,10 +23,10 @@ export function StepAnalyzing({ name }: { name: string }) {
 
   return (
     <div className="text-center py-8">
-      {/* Animated brain/logo */}
+      {/* Animated logo */}
       <div className="relative w-24 h-24 mx-auto mb-10">
         <motion.div
-          className="w-24 h-24 rounded-3xl bg-gradient-to-br from-blue-500 to-violet-600 flex items-center justify-center shadow-2xl"
+          className="w-24 h-24 rounded-3xl bg-gradient-to-br from-violet-600 to-blue-600 flex items-center justify-center shadow-2xl shadow-violet-200"
           animate={{ scale: [1, 1.05, 1], rotate: [0, 2, -2, 0] }}
           transition={{ duration: 2, repeat: Infinity }}
         >
@@ -35,17 +35,17 @@ export function StepAnalyzing({ name }: { name: string }) {
         {[0, 1, 2, 3].map((i) => (
           <motion.div
             key={i}
-            className="absolute inset-0 rounded-3xl border-2 border-blue-500/30"
+            className="absolute inset-0 rounded-3xl border-2 border-violet-500/20"
             animate={{ scale: [1, 2], opacity: [0.4, 0] }}
             transition={{ duration: 2, repeat: Infinity, delay: i * 0.5 }}
           />
         ))}
       </div>
 
-      <h2 className="text-2xl font-black mb-2">
+      <h2 className="text-2xl font-black mb-2 text-[var(--fg)]">
         Analizuję Cię, {name}...
       </h2>
-      <p className="text-[var(--muted-foreground)] mb-10">AI oblicza Twój profil i tworzy plan nauki</p>
+      <p className="text-[var(--fg-muted)] mb-10">AI oblicza Twój profil i tworzy plan nauki</p>
 
       <div className="max-w-sm mx-auto space-y-3">
         {STEPS.map((step, i) => (
@@ -59,7 +59,7 @@ export function StepAnalyzing({ name }: { name: string }) {
               currentStep > i
                 ? "bg-green-500"
                 : currentStep === i
-                ? "bg-blue-500"
+                ? "bg-[var(--primary)]"
                 : "bg-[var(--border)]"
             }`}>
               {currentStep > i ? (
@@ -72,7 +72,7 @@ export function StepAnalyzing({ name }: { name: string }) {
                 />
               ) : null}
             </div>
-            <span className={currentStep >= i ? "text-[var(--foreground)]" : "text-[var(--muted-foreground)]"}>
+            <span className={currentStep >= i ? "text-[var(--fg)]" : "text-[var(--fg-subtle)]"}>
               {step}
             </span>
           </motion.div>

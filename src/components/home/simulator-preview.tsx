@@ -2,126 +2,115 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { ArrowRight, Zap, TrendingUp } from "lucide-react";
+import { ArrowRight, Zap, TrendingUp, Check } from "lucide-react";
+import { stagger, fadeUp, slideLeft, slideRight, viewport } from "@/lib/animations";
 
-const before = `napisz mi email do klienta że zamówienie jest opóźnione`;
-const after = `Wciel się w rolę customer success managera w firmie e-commerce. Napisz profesjonalny, empatyczny email do klienta informujący o 3-dniowym opóźnieniu zamówienia #12345.
-
-Email powinien:
-- zaczynać się od przeprosin i uznania frustracji klienta
-- wyjaśnić przyczynę opóźnienia (problemy logistyczne u dostawcy)
-- podać nową przewidywaną datę dostawy
-- zaproponować rekompensatę (10% zniżka na kolejne zamówienie)
-- zakończyć się pozytywną nutą i danymi kontaktowymi
-
-Ton: profesjonalny ale ludzki. Długość: 150-200 słów.`;
+const improvements = [
+  { tag: "Rola / Persona", desc: "AI wie kim jest i jaką ma perspektywę" },
+  { tag: "Kontekst", desc: "Numer zamówienia, przyczyna, czas opóźnienia" },
+  { tag: "Format wyjścia", desc: "Struktura maila, długość, CTA" },
+  { tag: "Ograniczenia", desc: "Ton, co zawrzeć, co pominąć" },
+];
 
 export function SimulatorPreview() {
   return (
-    <section className="py-24 px-4 bg-[var(--muted)]/50">
+    <section className="py-32 px-6 relative overflow-hidden">
+      {/* Background */}
+      <div className="absolute inset-0 -z-10 pointer-events-none">
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[rgba(139,92,246,0.03)] to-transparent" />
+      </div>
+
       <div className="max-w-6xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center mb-16"
-        >
-          <p className="text-sm font-semibold text-[var(--primary)] uppercase tracking-widest mb-3">Prompt Simulator</p>
-          <h2 className="text-4xl sm:text-5xl font-black tracking-tight mb-4">
+        <motion.div variants={stagger(0.07)} initial="hidden" whileInView="visible" viewport={viewport}
+          className="text-center mb-16">
+          <motion.p variants={fadeUp} className="text-xs font-bold tracking-[0.2em] uppercase text-[var(--primary)] mb-4">
+            Prompt Simulator
+          </motion.p>
+          <motion.h2 variants={fadeUp}
+            className="text-5xl sm:text-6xl font-black tracking-[-0.03em] leading-tight mb-5">
             Widzisz różnicę?
-          </h2>
-          <p className="text-[var(--muted-foreground)] text-lg max-w-xl mx-auto">
-            Wpisujesz prompt jak to robisz teraz. AI pokazuje Ci lepszą wersję — i wyjaśnia dlaczego działa 10x lepiej.
-          </p>
+          </motion.h2>
+          <motion.p variants={fadeUp} className="text-lg text-[var(--fg-muted)] max-w-xl mx-auto">
+            Wpisujesz prompt jak to robisz teraz. AI go ocenia, poprawia i pokazuje jak wygląda wynik z jednym i drugim.
+          </motion.p>
         </motion.div>
 
-        {/* Side by side comparison */}
-        <div className="grid md:grid-cols-2 gap-4 mb-8">
+        {/* Comparison */}
+        <div className="grid md:grid-cols-2 gap-4 mb-6">
           {/* Before */}
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            className="rounded-2xl border border-red-500/20 bg-red-500/5 overflow-hidden"
-          >
-            <div className="px-5 py-3 border-b border-red-500/20 flex items-center justify-between">
-              <span className="text-sm font-semibold text-red-500">Twój prompt</span>
-              <div className="flex items-center gap-1.5">
-                <div className="h-2 rounded-full bg-red-200 dark:bg-red-900 overflow-hidden" style={{ width: 80 }}>
-                  <div className="h-full bg-red-500 rounded-full" style={{ width: "25%" }} />
+          <motion.div variants={slideRight} initial="hidden" whileInView="visible" viewport={viewport}
+            className="rounded-2xl border border-red-500/15 bg-red-500/[0.04] overflow-hidden">
+            <div className="px-5 py-3.5 border-b border-red-500/10 flex items-center justify-between">
+              <span className="text-sm font-semibold text-red-400">Twój prompt</span>
+              <div className="flex items-center gap-2">
+                <div className="w-16 h-1.5 rounded-full bg-red-500/20 overflow-hidden">
+                  <div className="h-full w-[18%] rounded-full bg-red-500" />
                 </div>
-                <span className="text-xs text-red-500 font-bold">25%</span>
+                <span className="text-xs font-bold text-red-400">18%</span>
               </div>
             </div>
             <div className="p-5">
-              <p className="text-sm text-[var(--foreground)] font-mono leading-relaxed">{before}</p>
+              <p className="font-mono text-sm text-[var(--fg-muted)] italic">
+                "napisz mi email do klienta że zamówienie jest opóźnione"
+              </p>
             </div>
           </motion.div>
 
           {/* After */}
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            className="rounded-2xl border border-green-500/20 bg-green-500/5 overflow-hidden"
-          >
-            <div className="px-5 py-3 border-b border-green-500/20 flex items-center justify-between">
+          <motion.div variants={slideLeft} initial="hidden" whileInView="visible" viewport={viewport}
+            className="rounded-2xl border border-green-500/15 bg-green-500/[0.04] overflow-hidden">
+            <div className="px-5 py-3.5 border-b border-green-500/10 flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <Zap className="w-3.5 h-3.5 text-green-500" />
-                <span className="text-sm font-semibold text-green-500">Prompt po optymalizacji</span>
+                <Zap className="w-3.5 h-3.5 text-green-400" />
+                <span className="text-sm font-semibold text-green-400">Po optymalizacji</span>
               </div>
-              <div className="flex items-center gap-1.5">
-                <div className="h-2 rounded-full bg-green-200 dark:bg-green-900 overflow-hidden" style={{ width: 80 }}>
-                  <div className="h-full bg-green-500 rounded-full" style={{ width: "92%" }} />
+              <div className="flex items-center gap-2">
+                <div className="w-16 h-1.5 rounded-full bg-green-500/20 overflow-hidden">
+                  <div className="h-full w-[92%] rounded-full bg-green-500" />
                 </div>
-                <span className="text-xs text-green-500 font-bold">92%</span>
+                <span className="text-xs font-bold text-green-400 flex items-center gap-1">
+                  <TrendingUp className="w-3 h-3" />92%
+                </span>
               </div>
             </div>
             <div className="p-5">
-              <p className="text-sm text-[var(--foreground)] font-mono leading-relaxed whitespace-pre-line">{after}</p>
+              <p className="font-mono text-xs text-[var(--fg-muted)] leading-relaxed whitespace-pre-line">{`Wciel się w rolę customer success managera w firmie e-commerce.
+
+Napisz profesjonalny, empatyczny email do klienta informujący o 3-dniowym opóźnieniu zamówienia #12345.
+
+Email powinien:
+- zaczynać się od przeprosin
+- wyjaśnić przyczynę opóźnienia
+- podać nową datę dostawy
+- zaproponować 10% zniżkę
+
+Ton: profesjonalny ale ludzki. Maks 150 słów.`}</p>
             </div>
           </motion.div>
         </div>
 
-        {/* Improvements */}
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="rounded-2xl border border-[var(--border)] bg-[var(--card)] p-5 mb-8"
-        >
-          <div className="flex items-center gap-2 mb-4">
-            <TrendingUp className="w-4 h-4 text-[var(--primary)]" />
-            <span className="text-sm font-semibold">Co zostało poprawione</span>
-          </div>
-          <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-3">
-            {[
-              { tag: "Rola/persona", desc: "AI wie kim jest i jak ma pisać" },
-              { tag: "Kontekst", desc: "Numer zamówienia, przyczyna, czas" },
-              { tag: "Format wyjścia", desc: "Długość, ton, struktura maila" },
-              { tag: "Ograniczenia", desc: "Co ma zawierać, co zaproponować" },
-            ].map((item) => (
-              <div key={item.tag} className="flex items-start gap-2">
-                <span className="mt-0.5 w-2 h-2 rounded-full bg-gradient-to-br from-blue-500 to-violet-600 shrink-0" />
+        {/* Improvements breakdown */}
+        <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={viewport}
+          className="rounded-2xl border border-[var(--border)] bg-[var(--bg-card)] p-6 mb-10">
+          <p className="text-xs font-bold tracking-[0.15em] uppercase text-[var(--fg-subtle)] mb-5">Co zostało poprawione</p>
+          <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-4">
+            {improvements.map((imp) => (
+              <div key={imp.tag} className="flex items-start gap-3">
+                <div className="mt-0.5 w-5 h-5 rounded-full bg-[var(--primary)]/15 border border-[var(--primary)]/25 flex items-center justify-center shrink-0">
+                  <Check className="w-2.5 h-2.5 text-[var(--primary)]" />
+                </div>
                 <div>
-                  <p className="text-xs font-bold text-[var(--foreground)]">{item.tag}</p>
-                  <p className="text-xs text-[var(--muted-foreground)]">{item.desc}</p>
+                  <p className="text-sm font-bold text-[var(--fg)] mb-0.5">{imp.tag}</p>
+                  <p className="text-xs text-[var(--fg-subtle)] leading-relaxed">{imp.desc}</p>
                 </div>
               </div>
             ))}
           </div>
         </motion.div>
 
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          className="text-center"
-        >
-          <Link
-            href="/simulator"
-            className="group inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-gradient-to-r from-blue-500 to-violet-600 text-white font-semibold shadow-lg hover:shadow-blue-500/25 hover:scale-105 transition-all"
-          >
+        <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={viewport} className="text-center">
+          <Link href="/simulator"
+            className="btn-primary group inline-flex items-center gap-2.5 px-8 py-4 text-base font-semibold rounded-xl shadow-[0_0_0_1px_rgba(139,92,246,0.3)]">
             <Zap className="w-4 h-4" />
             Spróbuj na swoim prompcie
             <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />

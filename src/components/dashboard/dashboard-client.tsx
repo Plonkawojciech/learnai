@@ -47,9 +47,9 @@ export function DashboardClient() {
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-10">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
           <div>
-            <p className="text-sm text-[var(--muted-foreground)] mb-1">Twój dashboard</p>
-            <h1 className="text-3xl font-black tracking-tight">
-              Witaj z powrotem{assessment ? "" : ""} 👋
+            <p className="text-sm text-[var(--fg-muted)] mb-1">Twój dashboard</p>
+            <h1 className="text-3xl font-black tracking-tight text-[var(--fg)]">
+              Witaj z powrotem 👋
             </h1>
           </div>
           <div className={`inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r ${lc.color} text-white text-sm font-bold shadow-md`}>
@@ -63,13 +63,13 @@ export function DashboardClient() {
           {[
             { label: "Ukończone lekcje", value: completedLessons, icon: CheckCircle2, color: "text-green-500" },
             { label: "Całkowite lekcje", value: totalLessons, icon: BookOpen, color: "text-blue-500" },
-            { label: "Moduły", value: modules.length, icon: Trophy, color: "text-violet-500" },
+            { label: "Moduły", value: modules.length, icon: Trophy, color: "text-[var(--primary)]" },
             { label: "Postęp", value: `${totalLessons > 0 ? Math.round((completedLessons / totalLessons) * 100) : 0}%`, icon: Clock, color: "text-orange-500" },
           ].map((stat) => (
-            <div key={stat.label} className="p-4 rounded-xl border border-[var(--border)] bg-[var(--card)]">
+            <div key={stat.label} className="card p-4">
               <stat.icon className={`w-5 h-5 ${stat.color} mb-2`} />
-              <p className="text-2xl font-black">{stat.value}</p>
-              <p className="text-xs text-[var(--muted-foreground)] mt-0.5">{stat.label}</p>
+              <p className="text-2xl font-black text-[var(--fg)]">{stat.value}</p>
+              <p className="text-xs text-[var(--fg-muted)] mt-0.5">{stat.label}</p>
             </div>
           ))}
         </div>
@@ -81,13 +81,13 @@ export function DashboardClient() {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
-          className="p-5 rounded-2xl border border-[var(--primary)]/30 bg-[var(--primary)]/5 mb-8"
+          className="p-5 rounded-2xl border border-[var(--primary)]/25 bg-[var(--primary)]/5 mb-8"
         >
           <div className="flex items-start gap-3">
             <Zap className="w-5 h-5 text-[var(--primary)] mt-0.5 shrink-0" />
             <div className="flex-1">
               <p className="text-sm font-bold text-[var(--primary)] mb-1">Twój pierwszy krok</p>
-              <p className="text-sm text-[var(--foreground)]">{result.firstStep}</p>
+              <p className="text-sm text-[var(--fg)]">{result.firstStep}</p>
             </div>
             <Link
               href={`/courses/${modules[0]?.id}/${modules[0]?.lessons[0]?.id}`}
@@ -101,7 +101,7 @@ export function DashboardClient() {
 
       {/* Modules */}
       <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.15 }}>
-        <h2 className="text-xl font-black mb-5">Twój plan nauki</h2>
+        <h2 className="text-xl font-black mb-5 text-[var(--fg)]">Twój plan nauki</h2>
         <div className="space-y-4">
           {modules.map((mod, mi) => {
             const moduleLessons = mod.lessons;
@@ -112,9 +112,9 @@ export function DashboardClient() {
             return (
               <div
                 key={mod.id}
-                className={`rounded-2xl border overflow-hidden transition-all ${
-                  isLocked ? "border-[var(--border)] opacity-60" : "border-[var(--border)] hover:border-[var(--primary)]/30"
-                } bg-[var(--card)]`}
+                className={`card overflow-hidden transition-all ${
+                  isLocked ? "opacity-60" : "hover:border-[var(--primary)]/25"
+                }`}
               >
                 <div className="p-5">
                   <div className="flex items-start gap-4">
@@ -123,20 +123,20 @@ export function DashboardClient() {
                     </div>
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-2 flex-wrap">
-                        <h3 className="font-bold text-[var(--foreground)]">{mod.title}</h3>
-                        <span className="text-xs px-2 py-0.5 rounded-full bg-[var(--muted)] text-[var(--muted-foreground)]">
+                        <h3 className="font-bold text-[var(--fg)]">{mod.title}</h3>
+                        <span className="text-xs px-2 py-0.5 rounded-full bg-[var(--bg-subtle)] text-[var(--fg-muted)] border border-[var(--border)]">
                           {mod.duration}
                         </span>
                         {completedInModule === moduleLessons.length && moduleLessons.length > 0 && (
-                          <span className="text-xs px-2 py-0.5 rounded-full bg-green-500/10 text-green-500 font-bold border border-green-500/20">
+                          <span className="text-xs px-2 py-0.5 rounded-full bg-green-500/10 text-green-600 font-bold border border-green-500/20">
                             ✓ Ukończony
                           </span>
                         )}
                       </div>
-                      <p className="text-sm text-[var(--muted-foreground)] mt-0.5">{mod.subtitle}</p>
+                      <p className="text-sm text-[var(--fg-muted)] mt-0.5">{mod.subtitle}</p>
                       {!isLocked && moduleLessons.length > 0 && (
                         <div className="mt-3">
-                          <div className="flex items-center justify-between text-xs text-[var(--muted-foreground)] mb-1">
+                          <div className="flex items-center justify-between text-xs text-[var(--fg-muted)] mb-1">
                             <span>{completedInModule}/{moduleLessons.length} lekcji</span>
                             <span>{Math.round(progressPct)}%</span>
                           </div>
@@ -152,7 +152,7 @@ export function DashboardClient() {
                     {!isLocked && (
                       <Link
                         href={`/courses/${mod.id}/${mod.lessons[0]?.id}`}
-                        className="shrink-0 w-9 h-9 rounded-lg border border-[var(--border)] flex items-center justify-center text-[var(--muted-foreground)] hover:text-[var(--foreground)] hover:bg-[var(--muted)] transition-all"
+                        className="shrink-0 w-9 h-9 rounded-lg border border-[var(--border)] flex items-center justify-center text-[var(--fg-muted)] hover:text-[var(--fg)] hover:bg-[var(--bg-subtle)] transition-all"
                       >
                         <ChevronRight className="w-4 h-4" />
                       </Link>
@@ -170,11 +170,11 @@ export function DashboardClient() {
                         <Link
                           key={lesson.id}
                           href={`/courses/${mod.id}/${lesson.id}`}
-                          className="flex items-center gap-3 px-5 py-3 hover:bg-[var(--muted)]/50 transition-colors"
+                          className="flex items-center gap-3 px-5 py-3 hover:bg-[var(--bg-subtle)] transition-colors"
                         >
                           <span className="text-sm">{typeIcons[lesson.type]}</span>
-                          <span className="flex-1 text-sm text-[var(--foreground)]">{lesson.title}</span>
-                          <span className="text-xs text-[var(--muted-foreground)]">{lesson.duration}</span>
+                          <span className="flex-1 text-sm text-[var(--fg)]">{lesson.title}</span>
+                          <span className="text-xs text-[var(--fg-muted)]">{lesson.duration}</span>
                           {done ? (
                             <CheckCircle2 className="w-4 h-4 text-green-500" />
                           ) : (
@@ -196,19 +196,19 @@ export function DashboardClient() {
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.3 }}
-        className="mt-8 p-5 rounded-2xl border border-[var(--border)] bg-gradient-to-br from-blue-500/10 to-violet-500/10"
+        className="mt-8 p-5 rounded-2xl border border-[var(--border)] bg-gradient-to-br from-blue-500/5 to-violet-500/5"
       >
         <div className="flex items-center justify-between gap-4 flex-wrap">
           <div>
             <div className="flex items-center gap-2 mb-1">
-              <Zap className="w-4 h-4 text-blue-500" />
-              <span className="font-bold text-sm">Prompt Simulator</span>
+              <Zap className="w-4 h-4 text-[var(--primary)]" />
+              <span className="font-bold text-sm text-[var(--fg)]">Prompt Simulator</span>
             </div>
-            <p className="text-sm text-[var(--muted-foreground)]">Ćwicz pisanie promptów i natychmiast otrzymuj feedback AI</p>
+            <p className="text-sm text-[var(--fg-muted)]">Ćwicz pisanie promptów i natychmiast otrzymuj feedback AI</p>
           </div>
           <Link
             href="/simulator"
-            className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-blue-500 to-violet-600 text-white font-semibold text-sm hover:opacity-90 transition-all shadow-md"
+            className="btn-primary flex items-center gap-2 px-5 py-2.5 rounded-xl font-semibold text-sm"
           >
             Otwórz Simulator
             <ArrowRight className="w-4 h-4" />

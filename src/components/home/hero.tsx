@@ -1,112 +1,122 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import Link from "next/link";
-import { ArrowRight, Sparkles, Zap } from "lucide-react";
+import { useRef } from "react";
+import { ArrowRight, Zap, Sparkles } from "lucide-react";
+import { stagger, fadeUp, fadeIn, viewport } from "@/lib/animations";
 
-const models = ["Claude", "ChatGPT", "Gemini", "Mistral", "LangChain", "RAG", "Agents", "GPT-4o"];
+const MODELS = ["Claude", "GPT-4o", "Gemini", "Mistral", "LangChain", "RAG", "Agents"];
 
 export function Hero() {
+  const ref = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
+  const y  = useTransform(scrollYProgress, [0, 1], [0, 120]);
+  const op = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
+
   return (
-    <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden px-4 pt-16">
-      {/* Background glow */}
-      <div className="absolute inset-0 -z-10">
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-blue-500/10 rounded-full blur-3xl" />
-        <div className="absolute top-1/3 left-1/3 w-[400px] h-[400px] bg-violet-500/8 rounded-full blur-3xl" />
+    <section ref={ref} className="relative min-h-screen flex items-center justify-center overflow-hidden">
+
+      {/* ── Background ───────────────────────────────────── */}
+      <div className="absolute inset-0 -z-10 pointer-events-none" aria-hidden>
+        {/* Subtle dot grid */}
+        <div className="absolute inset-0 dot-grid opacity-60" />
+
+        {/* Radial fade out edges */}
+        <div className="absolute inset-0"
+          style={{ background: "radial-gradient(ellipse 80% 60% at 50% 100%, transparent 40%, var(--bg) 90%)" }} />
+        <div className="absolute inset-0"
+          style={{ background: "radial-gradient(ellipse 80% 50% at 50% -5%, transparent 60%, var(--bg) 95%)" }} />
+
+        {/* Color orbs */}
+        <motion.div style={{ y }} className="absolute inset-0">
+          <div className="absolute top-[10%] left-[20%] w-[500px] h-[500px] rounded-full animate-float"
+            style={{ background: "radial-gradient(ellipse, rgba(109,40,217,0.12) 0%, transparent 70%)" }} />
+          <div className="absolute top-[15%] right-[15%] w-[400px] h-[400px] rounded-full animate-float2"
+            style={{ background: "radial-gradient(ellipse, rgba(37,99,235,0.1) 0%, transparent 70%)" }} />
+          <div className="absolute bottom-[10%] left-[40%] w-[300px] h-[300px] rounded-full animate-float"
+            style={{ background: "radial-gradient(ellipse, rgba(8,145,178,0.08) 0%, transparent 70%)", animationDelay: "3s" }} />
+        </motion.div>
+
+        {/* Noise */}
+        <div className="absolute inset-0 noise-overlay" />
       </div>
 
-      <div className="max-w-4xl mx-auto text-center">
+      {/* ── Content ──────────────────────────────────────── */}
+      <motion.div style={{ opacity: op }} className="relative z-10 max-w-5xl mx-auto px-6 pt-36 pb-28 text-center">
+
         {/* Badge */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[var(--border)] bg-[var(--muted)] text-sm text-[var(--muted-foreground)] mb-8"
-        >
-          <Sparkles className="w-3.5 h-3.5 text-blue-500" />
+        <motion.div variants={fadeUp} initial="hidden" animate="visible"
+          className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full mb-10
+            bg-[var(--bg-card)] border border-[var(--border)] shadow-sm
+            text-sm font-medium text-[var(--fg-muted)]">
+          <span className="relative flex h-2 w-2">
+            <span className="animate-ping-slow absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75" />
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500" />
+          </span>
           AI & Prompt Engineering Academy
+          <span className="h-3.5 w-px bg-[var(--border)]" />
+          <span className="text-[var(--primary)] font-semibold">Zacznij za darmo</span>
         </motion.div>
 
         {/* Headline */}
-        <motion.h1
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.1 }}
-          className="text-5xl sm:text-6xl md:text-7xl font-black tracking-tight leading-[1.05] mb-6"
-        >
-          Naucz się AI.
-          <br />
-          <span className="bg-gradient-to-r from-blue-500 to-violet-600 bg-clip-text text-transparent">
-            Naprawdę.
-          </span>
-        </motion.h1>
+        <motion.div variants={stagger(0.06, 0.1)} initial="hidden" animate="visible">
+          <motion.h1 variants={fadeUp}
+            className="text-6xl sm:text-7xl md:text-[88px] font-black tracking-[-0.04em] leading-[0.93] mb-7">
+            <span className="text-[var(--fg)]">Naucz się AI.</span>
+            <br />
+            <span className="text-gradient">Naprawdę.</span>
+          </motion.h1>
 
-        {/* Subtitle */}
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="text-lg sm:text-xl text-[var(--muted-foreground)] max-w-2xl mx-auto mb-10 leading-relaxed"
-        >
-          Od „co to jest AI?" do budowania własnych produktów z AI.
-          Kursy, symulatory promptów, narzędzia — dla każdego.
-          Bez ściemy.
-        </motion.p>
+          <motion.p variants={fadeUp}
+            className="text-xl sm:text-2xl text-[var(--fg-muted)] max-w-2xl mx-auto mb-12 leading-relaxed font-light">
+            Od{" "}
+            <span className="text-[var(--fg)] font-medium italic">"co to jest AI?"</span>
+            {" "}do budowania własnych produktów.
+            <br />
+            Kursy, symulatory, narzędzia — dla każdego. Bez ściemy.
+          </motion.p>
 
-        {/* CTAs */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-16"
-        >
-          <Link
-            href="/onboarding"
-            className="group flex items-center gap-2 px-6 py-3.5 rounded-xl bg-gradient-to-r from-blue-500 to-violet-600 text-white font-semibold text-base shadow-lg hover:shadow-blue-500/25 hover:scale-105 transition-all duration-200"
-          >
-            <Zap className="w-4 h-4" />
-            Sprawdź swój poziom AI
-            <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
-          </Link>
-          <Link
-            href="/simulator"
-            className="flex items-center gap-2 px-6 py-3.5 rounded-xl border border-[var(--border)] text-[var(--foreground)] font-semibold text-base hover:bg-[var(--muted)] transition-all duration-200"
-          >
-            Prompt Simulator
-          </Link>
-        </motion.div>
+          {/* CTA buttons */}
+          <motion.div variants={fadeUp} className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
+            <Link href="/onboarding"
+              className="btn-primary group flex items-center gap-2.5 px-8 py-4 text-base font-semibold rounded-xl">
+              <Sparkles className="w-4 h-4" />
+              Sprawdź swój poziom AI
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+            </Link>
+            <Link href="/simulator"
+              className="group flex items-center gap-2.5 px-8 py-4 text-base font-semibold rounded-xl
+                bg-[var(--bg-card)] border border-[var(--border)] text-[var(--fg-muted)]
+                hover:text-[var(--fg)] hover:border-[var(--border-md)] hover:shadow-md
+                shadow-sm transition-all duration-300">
+              <Zap className="w-4 h-4" />
+              Prompt Simulator
+            </Link>
+          </motion.div>
 
-        {/* Models scroll */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.5 }}
-          className="flex flex-wrap items-center justify-center gap-2"
-        >
-          <span className="text-xs text-[var(--muted-foreground)] mr-2">Nauczysz się:</span>
-          {models.map((model, i) => (
-            <motion.span
-              key={model}
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.5 + i * 0.05 }}
-              className="px-3 py-1 rounded-full border border-[var(--border)] text-xs font-medium text-[var(--muted-foreground)] bg-[var(--muted)]"
-            >
-              {model}
+          {/* Model pills */}
+          <motion.div variants={stagger(0.04, 0.6)} initial="hidden" animate="visible"
+            className="flex flex-wrap items-center justify-center gap-2">
+            <motion.span variants={fadeIn}
+              className="text-xs text-[var(--fg-subtle)] font-medium uppercase tracking-[0.15em] mr-1">
+              Nauczysz się
             </motion.span>
-          ))}
+            {MODELS.map((m) => (
+              <motion.span key={m} variants={fadeUp}
+                className="tag hover:border-[var(--border-md)] hover:text-[var(--fg)] transition-all cursor-default">
+                {m}
+              </motion.span>
+            ))}
+          </motion.div>
         </motion.div>
-      </div>
 
-      {/* Scroll indicator */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.2 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1"
-      >
-        <div className="w-px h-8 bg-gradient-to-b from-transparent to-[var(--border)]" />
-        <div className="w-1 h-1 rounded-full bg-[var(--muted-foreground)]" />
+        {/* Scroll hint */}
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.8 }}
+          className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1.5">
+          <div className="w-px h-8 bg-gradient-to-b from-transparent via-[var(--border-md)] to-transparent" />
+          <span className="text-[10px] tracking-[0.25em] uppercase text-[var(--fg-subtle)]">scroll</span>
+        </motion.div>
       </motion.div>
     </section>
   );
