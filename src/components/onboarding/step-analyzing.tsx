@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
+import { Zap } from "lucide-react";
 
 const STEPS = [
   "Analizuję Twoje odpowiedzi...",
@@ -23,36 +24,36 @@ export function StepAnalyzing({ name }: { name: string }) {
 
   return (
     <div className="text-center py-8">
-      {/* Animated logo */}
-      <div className="relative w-24 h-24 mx-auto mb-10">
+      {/* Animated icon */}
+      <div className="relative w-20 h-20 mx-auto mb-10">
         <motion.div
-          className="w-24 h-24 rounded-3xl bg-gradient-to-br from-violet-600 to-blue-600 flex items-center justify-center shadow-2xl shadow-violet-200"
-          animate={{ scale: [1, 1.05, 1], rotate: [0, 2, -2, 0] }}
+          className="w-20 h-20 rounded-2xl bg-gradient-to-br from-blue-600 to-sky-500 flex items-center justify-center shadow-xl shadow-blue-100"
+          animate={{ scale: [1, 1.05, 1] }}
           transition={{ duration: 2, repeat: Infinity }}
         >
-          <span className="text-4xl">🧠</span>
+          <Zap className="w-8 h-8 text-white" />
         </motion.div>
-        {[0, 1, 2, 3].map((i) => (
+        {[0, 1, 2].map((i) => (
           <motion.div
             key={i}
-            className="absolute inset-0 rounded-3xl border-2 border-violet-500/20"
-            animate={{ scale: [1, 2], opacity: [0.4, 0] }}
-            transition={{ duration: 2, repeat: Infinity, delay: i * 0.5 }}
+            className="absolute inset-0 rounded-2xl border-2 border-blue-400/20"
+            animate={{ scale: [1, 2.2], opacity: [0.4, 0] }}
+            transition={{ duration: 2, repeat: Infinity, delay: i * 0.6 }}
           />
         ))}
       </div>
 
-      <h2 className="text-2xl font-black mb-2 text-[var(--fg)]">
+      <h2 className="font-display text-2xl font-bold mb-2 text-[var(--fg)]">
         Analizuję Cię, {name}...
       </h2>
-      <p className="text-[var(--fg-muted)] mb-10">AI oblicza Twój profil i tworzy plan nauki</p>
+      <p className="text-[var(--fg-muted)] text-sm mb-10">AI oblicza Twój profil i tworzy spersonalizowany plan</p>
 
       <div className="max-w-sm mx-auto space-y-3">
         {STEPS.map((step, i) => (
           <motion.div
             key={step}
             initial={{ opacity: 0, x: -10 }}
-            animate={{ opacity: currentStep >= i ? 1 : 0.3, x: 0 }}
+            animate={{ opacity: currentStep >= i ? 1 : 0.25, x: 0 }}
             className="flex items-center gap-3 text-sm"
           >
             <div className={`w-5 h-5 rounded-full flex items-center justify-center shrink-0 transition-all duration-300 ${
@@ -63,7 +64,9 @@ export function StepAnalyzing({ name }: { name: string }) {
                 : "bg-[var(--border)]"
             }`}>
               {currentStep > i ? (
-                <svg className="w-3 h-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" /></svg>
+                <svg className="w-3 h-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                </svg>
               ) : currentStep === i ? (
                 <motion.div
                   className="w-2 h-2 rounded-full bg-white"
@@ -72,7 +75,7 @@ export function StepAnalyzing({ name }: { name: string }) {
                 />
               ) : null}
             </div>
-            <span className={currentStep >= i ? "text-[var(--fg)]" : "text-[var(--fg-subtle)]"}>
+            <span className={`text-left ${currentStep >= i ? "text-[var(--fg)]" : "text-[var(--fg-subtle)]"}`}>
               {step}
             </span>
           </motion.div>

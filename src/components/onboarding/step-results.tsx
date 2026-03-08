@@ -5,9 +5,9 @@ import { ArrowRight, TrendingUp, Target, Zap, Calendar } from "lucide-react";
 import type { AssessResult } from "./wizard";
 
 const LEVEL_CONFIG = {
-  beginner: { color: "from-green-500 to-emerald-600", bg: "bg-green-500/8", border: "border-green-500/20", text: "text-green-600", emoji: "🌱" },
-  intermediate: { color: "from-blue-500 to-cyan-600", bg: "bg-blue-500/8", border: "border-blue-500/20", text: "text-blue-600", emoji: "⚡" },
-  advanced: { color: "from-violet-500 to-purple-600", bg: "bg-violet-500/8", border: "border-violet-500/20", text: "text-violet-600", emoji: "🚀" },
+  beginner:     { color: "from-green-500 to-emerald-600",  bg: "bg-green-500/5",  border: "border-green-500/20",  text: "text-green-600",  label: "Laik" },
+  intermediate: { color: "from-blue-500 to-cyan-600",      bg: "bg-blue-500/5",   border: "border-blue-500/20",   text: "text-blue-600",   label: "Power User" },
+  advanced:     { color: "from-blue-700 to-sky-500",       bg: "bg-blue-700/5",   border: "border-blue-700/20",   text: "text-blue-700",   label: "Builder" },
 };
 
 export function StepResults({
@@ -24,12 +24,15 @@ export function StepResults({
   return (
     <div>
       {/* Header */}
-      <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-center mb-8">
-        <div className="text-5xl mb-4">{config.emoji}</div>
-        <h2 className="text-3xl font-black tracking-tight mb-2 text-[var(--fg)]">
-          {name}, jesteś <span className={`bg-gradient-to-r ${config.color} bg-clip-text text-transparent`}>{result.levelLabel}</span>
+      <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-8">
+        <p className="text-xs font-bold tracking-[0.15em] uppercase text-[var(--primary)] mb-4">Wynik analizy</p>
+        <h2 className="font-display text-4xl font-bold tracking-tight mb-3 text-[var(--fg)]">
+          {name}, jesteś{" "}
+          <span className={`bg-gradient-to-r ${config.color} bg-clip-text text-transparent`}>
+            {result.levelLabel}
+          </span>
         </h2>
-        <p className="text-[var(--fg-muted)] max-w-lg mx-auto">{result.summary}</p>
+        <p className="text-[var(--fg-muted)] leading-relaxed">{result.summary}</p>
       </motion.div>
 
       {/* Score */}
@@ -43,7 +46,7 @@ export function StepResults({
           <span className="text-sm font-semibold text-[var(--fg)]">Poziom wiedzy AI</span>
           <span className={`text-2xl font-black ${config.text}`}>{result.score}%</span>
         </div>
-        <div className="h-3 rounded-full bg-[var(--border)] overflow-hidden">
+        <div className="h-2 rounded-full bg-[var(--border)] overflow-hidden">
           <motion.div
             initial={{ width: 0 }}
             animate={{ width: `${result.score}%` }}
@@ -68,7 +71,7 @@ export function StepResults({
           <ul className="space-y-1.5">
             {result.strengths.map((s, i) => (
               <li key={i} className="flex items-start gap-2 text-sm text-[var(--fg-muted)]">
-                <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-green-500 shrink-0" />
+                <span className="mt-1.5 w-1 h-1 rounded-full bg-green-500 shrink-0" />
                 {s}
               </li>
             ))}
@@ -82,7 +85,7 @@ export function StepResults({
           <ul className="space-y-1.5">
             {result.gaps.map((g, i) => (
               <li key={i} className="flex items-start gap-2 text-sm text-[var(--fg-muted)]">
-                <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-orange-500 shrink-0" />
+                <span className="mt-1.5 w-1 h-1 rounded-full bg-orange-500 shrink-0" />
                 {g}
               </li>
             ))}
@@ -128,7 +131,7 @@ export function StepResults({
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.4 }}
-        className="p-4 rounded-xl border border-[var(--primary)]/25 bg-[var(--primary)]/5 mb-6"
+        className="p-4 rounded-xl border border-[var(--primary)]/20 bg-[var(--primary)]/5 mb-6"
       >
         <div className="flex items-start gap-3">
           <Zap className="w-4 h-4 text-[var(--primary)] mt-0.5 shrink-0" />
@@ -139,7 +142,6 @@ export function StepResults({
         </div>
       </motion.div>
 
-      {/* Motivational message */}
       <motion.p
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -149,7 +151,6 @@ export function StepResults({
         "{result.motivationalMessage}"
       </motion.p>
 
-      {/* CTA */}
       <motion.button
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}

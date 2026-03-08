@@ -48,8 +48,8 @@ export function DashboardClient() {
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
           <div>
             <p className="text-sm text-[var(--fg-muted)] mb-1">Twój dashboard</p>
-            <h1 className="text-3xl font-black tracking-tight text-[var(--fg)]">
-              Witaj z powrotem 👋
+            <h1 className="font-display text-3xl font-bold tracking-tight text-[var(--fg)]">
+              Witaj z powrotem
             </h1>
           </div>
           <div className={`inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r ${lc.color} text-white text-sm font-bold shadow-md`}>
@@ -129,7 +129,7 @@ export function DashboardClient() {
                         </span>
                         {completedInModule === moduleLessons.length && moduleLessons.length > 0 && (
                           <span className="text-xs px-2 py-0.5 rounded-full bg-green-500/10 text-green-600 font-bold border border-green-500/20">
-                            ✓ Ukończony
+                            Ukończony
                           </span>
                         )}
                       </div>
@@ -165,14 +165,12 @@ export function DashboardClient() {
                   <div className="border-t border-[var(--border)] divide-y divide-[var(--border)]">
                     {moduleLessons.map((lesson) => {
                       const done = progress[`${mod.id}/${lesson.id}`];
-                      const typeIcons: Record<string, string> = { article: "📄", video: "🎥", exercise: "💪", quiz: "🧩" };
                       return (
                         <Link
                           key={lesson.id}
                           href={`/courses/${mod.id}/${lesson.id}`}
                           className="flex items-center gap-3 px-5 py-3 hover:bg-[var(--bg-subtle)] transition-colors"
                         >
-                          <span className="text-sm">{typeIcons[lesson.type]}</span>
                           <span className="flex-1 text-sm text-[var(--fg)]">{lesson.title}</span>
                           <span className="text-xs text-[var(--fg-muted)]">{lesson.duration}</span>
                           {done ? (

@@ -41,8 +41,8 @@ export function Navbar() {
 
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2.5 group">
-            <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-violet-600 to-blue-600 flex items-center justify-center shadow-md shadow-violet-200
-              group-hover:shadow-violet-300 group-hover:scale-105 transition-all duration-300">
+            <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-blue-600 to-sky-500 flex items-center justify-center shadow-md shadow-blue-100
+              group-hover:shadow-blue-200 group-hover:scale-105 transition-all duration-300">
               <Zap className="w-4 h-4 text-white" />
             </div>
             <span className="font-black text-base text-[var(--fg)] tracking-tight">LearnAI</span>

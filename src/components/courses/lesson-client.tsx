@@ -53,7 +53,7 @@ export function LessonClient({ module, lesson }: { module: Module; lesson: Lesso
               </div>
               <div className="flex items-center gap-2 flex-wrap">
                 <span className="text-xs px-2 py-1 rounded-full bg-[var(--bg-subtle)] text-[var(--fg-muted)] font-medium border border-[var(--border)]">
-                  {lesson.type === "article" ? "📄 Artykuł" : lesson.type === "exercise" ? "💪 Ćwiczenie" : lesson.type === "quiz" ? "🧩 Quiz" : "🎥 Video"}
+                  {lesson.type === "article" ? "Artykuł" : lesson.type === "exercise" ? "Ćwiczenie" : lesson.type === "quiz" ? "Quiz" : "Video"}
                 </span>
                 <span className="flex items-center gap-1 text-xs text-[var(--fg-muted)]">
                   <Clock className="w-3 h-3" />
@@ -90,9 +90,7 @@ export function LessonClient({ module, lesson }: { module: Module; lesson: Lesso
           {/* Quiz */}
           {lesson.quiz && lesson.quiz.length > 0 && (
             <div className="mb-8">
-              <h3 className="text-lg font-black mb-4 flex items-center gap-2 text-[var(--fg)]">
-                <span>🧩</span> Sprawdź wiedzę
-              </h3>
+              <h3 className="text-lg font-black mb-4 text-[var(--fg)]">Sprawdź wiedzę</h3>
               <div className="space-y-5">
                 {lesson.quiz.map((q, qi) => (
                   <div key={qi} className="card p-5">

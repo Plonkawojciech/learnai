@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Zap, ArrowRight } from "lucide-react";
+import { ArrowRight, Zap } from "lucide-react";
 
 export function StepWelcome({ onNext }: { onNext: (name: string) => void }) {
   const [name, setName] = useState("");
@@ -10,10 +10,10 @@ export function StepWelcome({ onNext }: { onNext: (name: string) => void }) {
   return (
     <div className="text-center">
       <motion.div
-        initial={{ scale: 0 }}
-        animate={{ scale: 1 }}
+        initial={{ scale: 0, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
         transition={{ type: "spring", delay: 0.1 }}
-        className="w-16 h-16 rounded-2xl bg-gradient-to-br from-violet-600 to-blue-600 flex items-center justify-center mx-auto mb-8 shadow-xl shadow-violet-200"
+        className="w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-600 to-sky-500 flex items-center justify-center mx-auto mb-8 shadow-lg shadow-blue-100"
       >
         <Zap className="w-8 h-8 text-white" />
       </motion.div>
@@ -22,7 +22,7 @@ export function StepWelcome({ onNext }: { onNext: (name: string) => void }) {
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.2 }}
-        className="text-4xl sm:text-5xl font-black tracking-tight mb-3 text-[var(--fg)]"
+        className="font-display text-4xl sm:text-5xl font-bold tracking-tight mb-3 text-[var(--fg)]"
       >
         Witaj w LearnAI.
       </motion.h1>
@@ -30,7 +30,7 @@ export function StepWelcome({ onNext }: { onNext: (name: string) => void }) {
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.3 }}
-        className="text-[var(--fg-muted)] text-lg mb-10 max-w-md mx-auto"
+        className="text-[var(--fg-muted)] text-base mb-10 max-w-md mx-auto leading-relaxed"
       >
         Zanim zaczniesz, chcemy poznać Ciebie i Twój poziom — żebyś nie tracił czasu na rzeczy które już umiesz.
       </motion.p>
@@ -56,14 +56,12 @@ export function StepWelcome({ onNext }: { onNext: (name: string) => void }) {
         <button
           onClick={() => name.trim() && onNext(name.trim())}
           disabled={!name.trim()}
-          className="mt-4 w-full btn-primary flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl text-base font-semibold disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none disabled:shadow-none"
+          className="mt-4 w-full btn-primary flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl text-base font-semibold disabled:opacity-40 disabled:cursor-not-allowed disabled:transform-none disabled:shadow-none"
         >
           Zaczynamy
           <ArrowRight className="w-4 h-4" />
         </button>
-        <p className="text-xs text-[var(--fg-subtle)] mt-3">
-          Zajmie to ok. 3 minuty. Bez rejestracji.
-        </p>
+        <p className="text-xs text-[var(--fg-subtle)] mt-3">Zajmie to ok. 3 minuty. Bez rejestracji.</p>
       </motion.div>
     </div>
   );

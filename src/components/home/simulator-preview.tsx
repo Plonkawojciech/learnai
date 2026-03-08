@@ -27,7 +27,7 @@ export function SimulatorPreview() {
             Prompt Simulator
           </motion.p>
           <motion.h2 variants={fadeUp}
-            className="text-5xl sm:text-6xl font-black tracking-[-0.03em] leading-tight mb-5">
+            className="font-display text-5xl sm:text-6xl font-bold tracking-[-0.02em] leading-tight mb-5 text-[var(--fg)]">
             Widzisz różnicę?
           </motion.h2>
           <motion.p variants={fadeUp} className="text-lg text-[var(--fg-muted)] max-w-xl mx-auto">

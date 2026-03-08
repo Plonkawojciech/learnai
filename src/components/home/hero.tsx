@@ -3,7 +3,7 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import Link from "next/link";
 import { useRef } from "react";
-import { ArrowRight, Zap, Sparkles } from "lucide-react";
+import { ArrowRight, Zap } from "lucide-react";
 import { stagger, fadeUp, fadeIn, viewport } from "@/lib/animations";
 
 const MODELS = ["Claude", "GPT-4o", "Gemini", "Mistral", "LangChain", "RAG", "Agents"];
@@ -17,32 +17,26 @@ export function Hero() {
   return (
     <section ref={ref} className="relative min-h-screen flex items-center justify-center overflow-hidden">
 
-      {/* ── Background ───────────────────────────────────── */}
+      {/* Background */}
       <div className="absolute inset-0 -z-10 pointer-events-none" aria-hidden>
-        {/* Subtle dot grid */}
-        <div className="absolute inset-0 dot-grid opacity-60" />
-
-        {/* Radial fade out edges */}
+        <div className="absolute inset-0 dot-grid opacity-50" />
         <div className="absolute inset-0"
           style={{ background: "radial-gradient(ellipse 80% 60% at 50% 100%, transparent 40%, var(--bg) 90%)" }} />
         <div className="absolute inset-0"
           style={{ background: "radial-gradient(ellipse 80% 50% at 50% -5%, transparent 60%, var(--bg) 95%)" }} />
 
-        {/* Color orbs */}
         <motion.div style={{ y }} className="absolute inset-0">
           <div className="absolute top-[10%] left-[20%] w-[500px] h-[500px] rounded-full animate-float"
-            style={{ background: "radial-gradient(ellipse, rgba(109,40,217,0.12) 0%, transparent 70%)" }} />
+            style={{ background: "radial-gradient(ellipse, rgba(37,99,235,0.09) 0%, transparent 70%)" }} />
           <div className="absolute top-[15%] right-[15%] w-[400px] h-[400px] rounded-full animate-float2"
-            style={{ background: "radial-gradient(ellipse, rgba(37,99,235,0.1) 0%, transparent 70%)" }} />
+            style={{ background: "radial-gradient(ellipse, rgba(8,145,178,0.07) 0%, transparent 70%)" }} />
           <div className="absolute bottom-[10%] left-[40%] w-[300px] h-[300px] rounded-full animate-float"
-            style={{ background: "radial-gradient(ellipse, rgba(8,145,178,0.08) 0%, transparent 70%)", animationDelay: "3s" }} />
+            style={{ background: "radial-gradient(ellipse, rgba(37,99,235,0.05) 0%, transparent 70%)", animationDelay: "3s" }} />
         </motion.div>
-
-        {/* Noise */}
         <div className="absolute inset-0 noise-overlay" />
       </div>
 
-      {/* ── Content ──────────────────────────────────────── */}
+      {/* Content */}
       <motion.div style={{ opacity: op }} className="relative z-10 max-w-5xl mx-auto px-6 pt-36 pb-28 text-center">
 
         {/* Badge */}
@@ -62,27 +56,26 @@ export function Hero() {
         {/* Headline */}
         <motion.div variants={stagger(0.06, 0.1)} initial="hidden" animate="visible">
           <motion.h1 variants={fadeUp}
-            className="text-6xl sm:text-7xl md:text-[88px] font-black tracking-[-0.04em] leading-[0.93] mb-7">
+            className="font-display text-6xl sm:text-7xl md:text-[90px] font-bold tracking-[-0.02em] leading-[0.95] mb-8">
             <span className="text-[var(--fg)]">Naucz się AI.</span>
             <br />
-            <span className="text-gradient">Naprawdę.</span>
+            <span className="text-gradient italic">Naprawdę.</span>
           </motion.h1>
 
           <motion.p variants={fadeUp}
             className="text-xl sm:text-2xl text-[var(--fg-muted)] max-w-2xl mx-auto mb-12 leading-relaxed font-light">
             Od{" "}
-            <span className="text-[var(--fg)] font-medium italic">"co to jest AI?"</span>
+            <span className="text-[var(--fg)] font-medium">"co to jest AI?"</span>
             {" "}do budowania własnych produktów.
             <br />
-            Kursy, symulatory, narzędzia — dla każdego. Bez ściemy.
+            Kursy, symulatory, narzędzia — dla każdego.
           </motion.p>
 
           {/* CTA buttons */}
           <motion.div variants={fadeUp} className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
             <Link href="/onboarding"
               className="btn-primary group flex items-center gap-2.5 px-8 py-4 text-base font-semibold rounded-xl">
-              <Sparkles className="w-4 h-4" />
-              Sprawdź swój poziom AI
+              Sprawdź swój poziom
               <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
             </Link>
             <Link href="/simulator"
